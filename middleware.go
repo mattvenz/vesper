@@ -26,7 +26,7 @@ func buildChain(f LambdaFunc, m ...Middleware) LambdaFunc {
 
 // newMiddlewareWrapper takes the middleware chain, and converts it into
 // a Lambda-compatible interface
-func newMiddlewareWrapper(handlerInterface interface{}, middlewareChain LambdaFunc) lambdaHandler {
+func newMiddlewareWrapper(handlerInterface interface{}, middlewareChain LambdaFunc) LambdaHandler {
 	handlerType, err := handlerType(handlerInterface)
 	if err != nil {
 		return errorHandler(err)

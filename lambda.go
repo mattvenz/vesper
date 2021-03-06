@@ -8,11 +8,11 @@ import (
 )
 
 // This is the raw Lambda handler interface AWS needs to run a Lambda function
-type lambdaHandler func(context.Context, []byte) (interface{}, error)
+type LambdaHandler func(context.Context, []byte) (interface{}, error)
 
 // Invoke calls the handler, and serializes the response.
 // If the underlying handler returned an error, or an error occurs during serialization, error is returned.
-func (handler lambdaHandler) Invoke(ctx context.Context, payload []byte) ([]byte, error) {
+func (handler LambdaHandler) Invoke(ctx context.Context, payload []byte) ([]byte, error) {
 	response, err := handler(ctx, payload)
 	if err != nil {
 		return nil, err
@@ -26,7 +26,7 @@ func (handler lambdaHandler) Invoke(ctx context.Context, payload []byte) ([]byte
 	return responseBytes, nil
 }
 
-func errorHandler(e error) lambdaHandler {
+func errorHandler(e error) LambdaHandler {
 	return func(ctx context.Context, event []byte) (interface{}, error) {
 		return nil, e
 	}

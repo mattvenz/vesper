@@ -51,7 +51,7 @@ func (v *Vesper) Use(middlewares ...Middleware) *Vesper {
 	return v
 }
 
-func (v *Vesper) buildHandler() lambdaHandler {
+func (v *Vesper) BuildHandler() LambdaHandler {
 	mids := v.middlewares
 	if v.autoUnmarshal {
 		mids = append([]Middleware{JSONParserMiddleware()}, mids...)
@@ -62,7 +62,7 @@ func (v *Vesper) buildHandler() lambdaHandler {
 
 // Start is a convenience function run the lambda handler
 func (v *Vesper) Start() {
-	lambda.StartHandler(v.buildHandler())
+	lambda.StartHandler(v.BuildHandler())
 }
 
 // Logger sets the log to use
