@@ -1,4 +1,4 @@
-module github.com/mefellows/vesper
+module github.com/mattvenz/vesper
 
 go 1.14
 
